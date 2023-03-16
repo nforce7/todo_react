@@ -1,0 +1,10 @@
+
+
+.form{
+    display: flex;
+    gap: 8px;
+}
+
+.form > * {    /* * znači bilo koji element */
+    flex-grow: 1;
+}
