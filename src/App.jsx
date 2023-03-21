@@ -2,6 +2,7 @@ import './App.css';
 import React, { startTransition } from 'react';   //jer smo App pretvorili u klasu
 import FormInput from './FormInput/FormInput';  // ovo importamo jer react baca gresku
 import TodoList from './TodoList/TodoList';
+import { TodoType } from './utilities/constants';
 
 
 class App extends React.Component {
@@ -21,11 +22,12 @@ class App extends React.Component {
    }
 
      // updejtati todos sa promjenamau stanju dovršenosti pojedinog todo-a
-   handleTodoCompletedChange = (id, type) => {
+   handleTodoChange = (id, type) => {
+    const {todos} = this.state;  //destrukturiramo
 
       let newTodos =null;
-      if (type === "TOGGLE_COMPLETED"){
-        newTodos = this.state.todos.map((todo) => {
+      if (type === TodoType.TOGGLE_COMPLETED){
+        newTodos = todos.map((todo) => {
           if (todo.id===id) {
               return {...todo, completed: !todo.completed}   //toggle naizmjence promjena completed stanja
           } else{
@@ -34,8 +36,9 @@ class App extends React.Component {
       })
 
       }
-      else if (type==="DELETE") {
-        
+      else if (type===TodoType.DELETE) {
+        newTodos = todos.filter((todo) => todo.id !==id );    //todo.id je različit od id
+
       }
 
     
@@ -46,7 +49,7 @@ class App extends React.Component {
     return (
       <div className='app'>
       <FormInput handleFormSubmit={this.handleNewTodo} />
-      <TodoList todos={this.state.todos} onTodoChange={this.handleTodoCompletedChange} />  {/* //ovo je zapravo lista todoova */} 
+      <TodoList todos={this.state.todos} onTodoChange={this.handleTodoChange} />  {/* //ovo je zapravo lista todoova */} {/* //ovo je polaznisma tocka ontodochange */}
       </div>
     );
   }
