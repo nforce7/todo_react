@@ -3,7 +3,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { VisibilityType } from '../utilities/constants';
 
-export default function VisibiltyToolbar({onVisibilityChange}) {              //destrukturiram prop  onVisibilityChange
+export default function VisibiltyToolbar({ onVisibilityChange }) {              //destrukturiram prop  onVisibilityChange
     const [radioValue, setRadioValue] = useState(VisibilityType.ALL);
 
     const radios = [
@@ -12,14 +12,11 @@ export default function VisibiltyToolbar({onVisibilityChange}) {              //
         { name: 'Completed', value: VisibilityType.COMPLETED },
     ];
 
-
     function handleChange(e) {      //e je event
-            setRadioValue(e.target.value);
-
-
-            onVisibilityChange(e.target.value);   //ovo je za 3 gumbića
+        setRadioValue(e.target.value);
+        onVisibilityChange(e.target.value);   //ovo je za 3 gumbića
     }
-
+    
     return (
         <ButtonGroup className="mb-2">
             {radios.map((radio, idx) => (
